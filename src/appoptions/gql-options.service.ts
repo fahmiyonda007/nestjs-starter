@@ -1,4 +1,4 @@
-import {Injectable, Logger } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { GqlModuleOptions, GqlOptionsFactory } from '@nestjs/graphql';
 
 import { ConfigService } from '../config/config.service';

@@ -36,7 +36,7 @@ export class User {
   @Field()
   @Index({ unique: true })
   @IsPhoneNumber('ID')
-  @Column({nullable: true})
+  @Column({ nullable: true })
   phone: string;
 
   @Field()

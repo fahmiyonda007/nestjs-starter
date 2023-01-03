@@ -1,6 +1,12 @@
 import { Field, InputType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsAlphanumeric, IsAscii, IsEmail, IsPhoneNumber, MinLength } from 'class-validator';
+import {
+  IsAlphanumeric,
+  IsAscii,
+  IsEmail,
+  IsPhoneNumber,
+  MinLength,
+} from 'class-validator';
 
 import { User } from '../../users/users.entity';
 
