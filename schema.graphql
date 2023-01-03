@@ -28,14 +28,24 @@ type SignInResult {
   token: String!
 }
 
+type Role {
+  name: String!
+  version: Int!
+}
+
 type Query {
   users: [User!]!
   user(name: String!): User!
+  roles: [Role!]!
+  role(id: Int!): Role!
 }
 
 type Mutation {
   signUp(input: SignUpInput!): User!
   signIn(input: SignInInput!): SignInResult!
+  createRole(createRoleInput: CreateRoleInput!): Role!
+  updateRole(updateRoleInput: UpdateRoleInput!, id: Int!): Role!
+  removeRole(id: Int!): Role!
 }
 
 input SignUpInput {
@@ -48,4 +58,12 @@ input SignUpInput {
 input SignInInput {
   name: String!
   password: String!
+}
+
+input CreateRoleInput {
+  name: String!
+}
+
+input UpdateRoleInput {
+  name: String!
 }
