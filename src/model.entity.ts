@@ -1,19 +1,19 @@
-import { Field, ID } from '@nestjs/graphql'
+import { Field, ID } from '@nestjs/graphql';
 import {
   BaseEntity,
   CreateDateColumn,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-} from 'typeorm'
+} from 'typeorm';
 
 export default abstract class Model extends BaseEntity {
   @Field((type) => ID)
   @PrimaryGeneratedColumn()
-  id: number
+  id: number;
 
   @CreateDateColumn()
-  createdAt: Date
+  createdAt: Date;
 
   @UpdateDateColumn()
-  updatedAt: Date
+  updatedAt: Date;
 }

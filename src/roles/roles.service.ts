@@ -30,7 +30,7 @@ export class RolesService {
     const data = await this.rolesRepo.findOne({ id });
 
     if (!data) {
-      throw new NotFoundException()
+      throw new NotFoundException();
     }
 
     return data;
@@ -38,12 +38,12 @@ export class RolesService {
 
   async update(id: number, updateRoleInput: UpdateRoleInput): Promise<Role> {
     const data = await this.rolesRepo.findOne({ id });
-    
+
     if (!data) {
-      throw new NotFoundException()
+      throw new NotFoundException();
     }
 
-    Object.assign(data, updateRoleInput)
+    Object.assign(data, updateRoleInput);
     const result = await this.rolesRepo.save(data);
 
     return result;
@@ -52,10 +52,10 @@ export class RolesService {
   async remove(id: number): Promise<Role> {
     const data = await this.rolesRepo.findOne({ id });
     if (!data) {
-      throw new NotFoundException()
+      throw new NotFoundException();
     }
-    
-    await this.rolesRepo.remove(data)
-    return data
+
+    await this.rolesRepo.remove(data);
+    return data;
   }
 }

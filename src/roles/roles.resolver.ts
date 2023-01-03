@@ -25,7 +25,10 @@ export class RolesResolver {
   }
 
   @Mutation(() => Role)
-  updateRole(@Args('id', { type: () => Int }) id: number, @Args('updateRoleInput') updateRoleInput: UpdateRoleInput) {
+  updateRole(
+    @Args('id', { type: () => Int }) id: number,
+    @Args('updateRoleInput') updateRoleInput: UpdateRoleInput,
+  ) {
     return this.rolesService.update(id, updateRoleInput);
   }
 

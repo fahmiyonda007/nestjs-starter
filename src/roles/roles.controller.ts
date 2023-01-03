@@ -30,7 +30,7 @@ export class RolesController {
 
   @Post()
   async create(@Body() createRoleinput: CreateRoleInput): Promise<Role> {
-    const data =await this.rolesService.create(createRoleinput);
+    const data = await this.rolesService.create(createRoleinput);
     return data;
   }
 

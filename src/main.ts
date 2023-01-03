@@ -44,13 +44,13 @@ async function bootstrap(): Promise<void> {
 
   if (config.env.SWAGGER_UI) {
     const options = new DocumentBuilder()
-    .addBearerAuth()
-    .setTitle('Nest Starter API')
-    .setDescription('Nest Starter Project with nestJs framework')
-    .setVersion('1.0')
-    .addTag('Health Check')
-    .setContact('','http://example.net','yons@mail.com')
-    .build();
+      .addBearerAuth()
+      .setTitle('Nest Starter API')
+      .setDescription('Nest Starter Project with nestJs framework')
+      .setVersion('1.0')
+      .addTag('Health Check')
+      .setContact('', 'http://example.net', 'yons@mail.com')
+      .build();
     const document = SwaggerModule.createDocument(app, options);
     SwaggerModule.setup('docs', app, document);
   }
