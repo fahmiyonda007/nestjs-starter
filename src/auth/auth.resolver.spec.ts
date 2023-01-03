@@ -40,6 +40,7 @@ describe('AuthResolver', () => {
       const input: SignUpInput = {
         name: 'a',
         email: 'a@example.com',
+        phone: '1234567890',
         password: 'secret',
       };
       const result = plainToClass(User, {
