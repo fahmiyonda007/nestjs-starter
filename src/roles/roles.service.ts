@@ -11,51 +11,51 @@ import { Role } from './entities/role.entity';
 export class RolesService {
   constructor(
     @InjectRepository(Role)
-    private readonly rolesRepo: Repository<Role>,
+    private readonly myRepo: Repository<Role>,
   ) {}
 
   async create(createRoleInput: CreateRoleInput): Promise<Role> {
     const u = new Role();
     Object.assign(u, createRoleInput);
-    const result = await this.rolesRepo.save(u);
+    const result = await this.myRepo.save(u);
     return result;
   }
 
   async findAll(): Promise<Role[]> {
-    const datas = await this.rolesRepo.find();
+    const datas = await this.myRepo.find();
     return datas;
   }
 
   async findOne(id: number): Promise<Role> {
-    const data = await this.rolesRepo.findOne({ id });
+    const data = await this.myRepo.findOne({ id });
 
     if (!data) {
-      throw new NotFoundException();
+      throw new NotFoundException('Role not found');
     }
 
     return data;
   }
 
   async update(id: number, updateRoleInput: UpdateRoleInput): Promise<Role> {
-    const data = await this.rolesRepo.findOne({ id });
+    const data = await this.myRepo.findOne({ id });
 
     if (!data) {
       throw new NotFoundException();
     }
 
     Object.assign(data, updateRoleInput);
-    const result = await this.rolesRepo.save(data);
+    const result = await this.myRepo.save(data);
 
     return result;
   }
 
   async remove(id: number): Promise<Role> {
-    const data = await this.rolesRepo.findOne({ id });
+    const data = await this.myRepo.findOne({ id });
     if (!data) {
       throw new NotFoundException();
     }
 
-    await this.rolesRepo.remove(data);
+    await this.myRepo.remove(data);
     return data;
   }
 }

@@ -29,7 +29,7 @@ export class PermissionsService {
     const data = await this.permissionsRepo.findOne({ id });
 
     if (!data) {
-      throw new NotFoundException();
+      throw new NotFoundException('Permission not found');
     }
 
     return data;
