@@ -10,7 +10,7 @@ export class SignInInput implements Partial<User> {
   @Field()
   @IsAlphanumeric()
   @MinLength(1)
-  readonly name: string;
+  readonly username: string;
 
   @ApiProperty()
   @Field()

@@ -18,7 +18,7 @@ export class Role extends Model {
   @Index({ unique: true })
   @Column()
   name: string;
-
+  
   @Field((type) => Int)
   @VersionColumn()
   readonly version: number;

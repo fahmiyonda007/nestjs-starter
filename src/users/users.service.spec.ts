@@ -35,7 +35,7 @@ describe('UsersService', () => {
       const result = [
         plainToClass(User, {
           id: 1,
-          name: 'a',
+          username: 'a',
           email: 'a@example.com',
         }),
       ];
@@ -49,12 +49,12 @@ describe('UsersService', () => {
     });
   });
 
-  describe('findOneByName', () => {
+  describe('findOneByUserName', () => {
     it('should return the user', async () => {
       const input = 'a';
       const result = plainToClass(User, {
         id: 1,
-        name: 'a',
+        username: 'a',
         email: 'a@example.com',
       });
 
@@ -62,8 +62,8 @@ describe('UsersService', () => {
         .spyOn(repo, 'findOne')
         .mockReturnValue(new Promise<User>((resolve) => resolve(result)));
 
-      expect(await service.findOneByName(input)).toEqual(result);
-      const param = { name: input };
+      expect(await service.findOneByUserName(input)).toEqual(result);
+      const param = { username: input };
       expect(findOne.mock.calls[0][0]).toEqual(param);
     });
   });

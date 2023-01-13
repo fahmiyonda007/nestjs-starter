@@ -21,13 +21,13 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @UseInterceptors(ClassSerializerInterceptor)
-  @Post('signup')
+  @Post('register')
   async signUp(@Body() input: SignUpInput): Promise<User> {
     const user = await this.authService.signUp(input);
     return user;
   }
 
-  @Post('signin')
+  @Post('login')
   async signIn(@Body() input: SignInInput): Promise<SignInResult> {
     const result = await this.authService.signIn(input);
     if (!result.token) {

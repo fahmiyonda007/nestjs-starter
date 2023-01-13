@@ -4,7 +4,7 @@
 
 type User {
   id: ID!
-  name: String!
+  username: String!
   email: String!
   phone: String!
   createdAt: DateTime!
@@ -19,7 +19,7 @@ scalar DateTime
 
 type SignInResult {
   id: ID!
-  name: String!
+  username: String!
   email: String!
   phone: String!
   createdAt: DateTime!
@@ -49,14 +49,14 @@ type Mutation {
 }
 
 input SignUpInput {
-  name: String!
+  username: String!
   email: String!
   phone: String!
   password: String!
 }
 
 input SignInInput {
-  name: String!
+  username: String!
   password: String!
 }
 

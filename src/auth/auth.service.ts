@@ -36,7 +36,7 @@ export class AuthService {
   }
 
   async signIn(input: SignInInput): Promise<SignInResult> {
-    const user = await this.usersService.findOneByName(input.name);
+    const user = await this.usersService.findOneByUserName(input.username);
     if (!user) {
       return new SignInResult();
     }
@@ -48,7 +48,7 @@ export class AuthService {
 
     const payload: JwtPayload = {
       id: user.id,
-      name: user.name,
+      username: user.username,
       email: user.email,
     };
     const token = this.jwtService.sign(payload);
@@ -57,7 +57,7 @@ export class AuthService {
   }
 
   async validateUser(payload: JwtPayload): Promise<User> {
-    const user = await this.usersService.findOneByName(payload.name);
+    const user = await this.usersService.findOneByUserName(payload.username);
     return user;
   }
 }

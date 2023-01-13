@@ -19,7 +19,7 @@ describe('AppController (e2e)', () => {
 
   it('POST /api/auth/signup', async () => {
     const input = {
-      name: 'a',
+      username: 'a',
       email: 'a@a.com',
       password: 'aaaaaaaa',
     };
@@ -31,7 +31,7 @@ describe('AppController (e2e)', () => {
 
   it('POST /api/auth/signin', async () => {
     const input = {
-      name: 'a',
+      username: 'a',
       password: 'aaaaaaaa',
     };
     const res = await request(app.getHttpServer())
@@ -133,7 +133,7 @@ describe('AppController (e2e)', () => {
   it('GraphQL user', async () => {
     const q = `
       query User($input: String!) {
-        user(name: $input) {
+        user(username: $input) {
           id
           name
           email

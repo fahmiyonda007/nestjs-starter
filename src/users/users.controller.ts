@@ -3,11 +3,16 @@ import {
   Controller,
   Get,
   Param,
+  Query,
   UseGuards,
-  UseInterceptors,
+  UseInterceptors
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+
+import { PageOptionsDto } from '../paginate/dtos';
+import { PageDto } from '../paginate/page.dto';
+
 
 import { User } from './users.entity';
 import { UsersService } from './users.service';
@@ -21,8 +26,8 @@ export class UsersController {
   @ApiBearerAuth()
   @UseInterceptors(ClassSerializerInterceptor)
   @Get()
-  async findAll(): Promise<User[]> {
-    const users = await this.usersService.findAll();
+  async findAll(@Query() pageOptionsDto: PageOptionsDto): Promise<PageDto<User>> {
+    const users = await this.usersService.findAll(pageOptionsDto);
     return users;
   }
 
@@ -30,8 +35,8 @@ export class UsersController {
   @ApiBearerAuth()
   @UseInterceptors(ClassSerializerInterceptor)
   @Get(':name')
-  async findOneByName(@Param('name') name: string): Promise<User> {
-    const user = await this.usersService.findOneByName(name);
+  async findOneByUserName(@Param('name') username: string): Promise<User> {
+    const user = await this.usersService.findOneByUserName(username);
     return user;
   }
 }

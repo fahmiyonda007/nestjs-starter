@@ -13,7 +13,7 @@ describe('UsersResolver', () => {
   beforeEach(async () => {
     const usersServiceMockValue = {
       findAll: () => 'mock',
-      findOneByName: () => 'mock',
+      findOneByUserName: () => 'mock',
     };
     const UsersServiceMock = {
       provide: UsersService,
@@ -37,7 +37,7 @@ describe('UsersResolver', () => {
       const result = [
         plainToClass(User, {
           id: 1,
-          name: 'a',
+          username: 'a',
           email: 'a@example.com',
         }),
       ];
@@ -56,16 +56,16 @@ describe('UsersResolver', () => {
       const input = 'a';
       const result = plainToClass(User, {
         id: 1,
-        name: 'a',
+        username: 'a',
         email: 'a@example.com',
       });
 
-      const findOneByName = jest
-        .spyOn(service, 'findOneByName')
+      const findOneByUserName = jest
+        .spyOn(service, 'findOneByUserName')
         .mockReturnValue(new Promise<User>((resolve) => resolve(result)));
 
       expect(await resolver.user(input)).toEqual(result);
-      expect(findOneByName.mock.calls[0][0]).toEqual(input);
+      expect(findOneByUserName.mock.calls[0][0]).toEqual(input);
     });
   });
 });

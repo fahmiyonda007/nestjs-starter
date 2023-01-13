@@ -39,14 +39,14 @@ describe('Auth Controller', () => {
   describe('signUp', () => {
     it('should call AuthService.signUp', async () => {
       const input: SignUpInput = {
-        name: 'a',
+        username: 'a',
         email: 'a@example.com',
         phone: '1234567890',
         password: 'secret',
       };
       const result = plainToClass(User, {
         id: 1,
-        name: 'a',
+        username: 'a',
         email: 'a@example.com',
       });
 
@@ -64,7 +64,7 @@ describe('Auth Controller', () => {
     describe('when sign-in is successful', () => {
       it('should return token', async () => {
         const input: SignInInput = {
-          name: 'a',
+          username: 'a',
           password: 'secret',
         };
         const result = plainToClass(SignInResult, {
@@ -84,7 +84,7 @@ describe('Auth Controller', () => {
     describe('when sign-in failed', () => {
       it('should throw BadRequestException', async () => {
         const input: SignInInput = {
-          name: 'a',
+          username: 'a',
           password: 'secret',
         };
         const result = plainToClass(SignInResult, {

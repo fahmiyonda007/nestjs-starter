@@ -13,7 +13,7 @@ describe('Users Controller', () => {
   beforeEach(async () => {
     const usersServiceMockValue = {
       findAll: () => 'mock',
-      findOneByName: () => 'mock',
+      findOneByUserName: () => 'mock',
     };
     const UsersServiceMock = {
       provide: UsersService,
@@ -38,7 +38,7 @@ describe('Users Controller', () => {
       const result = [
         plainToClass(User, {
           id: 1,
-          name: 'a',
+          username: 'a',
           email: 'a@example.com',
         }),
       ];
@@ -52,21 +52,21 @@ describe('Users Controller', () => {
     });
   });
 
-  describe('findOneByName', () => {
+  describe('findOneByUserName', () => {
     it('should return the user', async () => {
       const input = 'a';
       const result = plainToClass(User, {
         id: 1,
-        name: 'a',
+        username: 'a',
         email: 'a@example.com',
       });
 
-      const findOneByName = jest
-        .spyOn(service, 'findOneByName')
+      const findOneByUserName = jest
+        .spyOn(service, 'findOneByUserName')
         .mockReturnValue(new Promise<User>((resolve) => resolve(result)));
 
-      expect(await controller.findOneByName(input)).toEqual(result);
-      expect(findOneByName.mock.calls[0][0]).toEqual(input);
+      expect(await controller.findOneByUserName(input)).toEqual(result);
+      expect(findOneByUserName.mock.calls[0][0]).toEqual(input);
     });
   });
 });

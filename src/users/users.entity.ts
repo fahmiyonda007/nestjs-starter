@@ -17,12 +17,13 @@ import {
 export class User {
   @Field((type) => ID)
   @PrimaryGeneratedColumn()
+  @Exclude()
   readonly id: number;
 
   @Field()
   @Index({ unique: true })
   @Column()
-  name: string;
+  username: string;
 
   @Field()
   @Index({ unique: true })

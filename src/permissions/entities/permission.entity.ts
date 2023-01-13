@@ -15,7 +15,7 @@ export class Permission extends Model {
   @Field((type) => Int)
   @VersionColumn()
   readonly version: number;
-
+  
   @OneToMany(() => RolePermission, (x) => x.permission)
   rolePermission: RolePermission[];
 }
