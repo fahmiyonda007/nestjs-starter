@@ -2,13 +2,37 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type PageMetaDto {
+  page: Float!
+  take: Float!
+  itemCount: Float!
+  pageCount: Float!
+  hasPreviousPage: Boolean!
+  hasNextPage: Boolean!
+}
+
 type User {
   id: ID!
-  username: String!
-  email: String!
-  phone: String!
   createdAt: DateTime!
   updatedAt: DateTime!
+
+  """Full name Of user"""
+  fullname: String!
+
+  """Unique Username Of user"""
+  username: String!
+
+  """Unique Email Of user"""
+  email: String!
+
+  """Password Of user"""
+  password: String!
+
+  """Phone Of user"""
+  phone: String!
+
+  """Address Of user"""
+  address: String
   version: Int!
 }
 
@@ -17,53 +41,91 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type PaginatedUser {
+  data: [User!]
+  meta: PageMetaDto!
+}
+
 type SignInResult {
   id: ID!
-  username: String!
-  email: String!
-  phone: String!
   createdAt: DateTime!
   updatedAt: DateTime!
+
+  """Full name Of user"""
+  fullname: String!
+
+  """Unique Username Of user"""
+  username: String!
+
+  """Unique Email Of user"""
+  email: String!
+
+  """Password Of user"""
+  password: String!
+
+  """Phone Of user"""
+  phone: String!
+
+  """Address Of user"""
+  address: String
   version: Int!
   token: String!
 }
 
-type Role {
-  name: String!
-  version: Int!
+type Query {
+  users(pageOptionsDto: PageOptionsDto!): PaginatedUser!
+  user(input: String!): User!
 }
 
-type Query {
-  users: [User!]!
-  user(name: String!): User!
-  roles: [Role!]!
-  role(id: Int!): Role!
+input PageOptionsDto {
+  """Order By"""
+  order: order = ASC
+
+  """Page"""
+  page: Float = 1
+
+  """Take"""
+  take: Float = 10
+
+  """Filter"""
+  filter: String = ""
+}
+
+"""The type of Order By."""
+enum order {
+  """Ascending"""
+  ASC
+
+  """Descending"""
+  DESC
 }
 
 type Mutation {
-  signUp(input: SignUpInput!): User!
-  signIn(input: SignInInput!): SignInResult!
-  createRole(createRoleInput: CreateRoleInput!): Role!
-  updateRole(updateRoleInput: UpdateRoleInput!, id: Int!): Role!
-  removeRole(id: Int!): Role!
+  signUp(signUpInput: SignUpInput!): User!
+  signIn(signInInput: SignInInput!): SignInResult!
 }
 
 input SignUpInput {
+  """Full name Of user"""
+  fullname: String!
+
+  """Unique Username Of user"""
   username: String!
+
+  """Unique Email Of user"""
   email: String!
-  phone: String!
+
+  """Password Of user"""
   password: String!
+
+  """Phone Of user"""
+  phone: String!
+
+  """Address Of user"""
+  address: String
 }
 
 input SignInInput {
   username: String!
   password: String!
-}
-
-input CreateRoleInput {
-  name: String!
-}
-
-input UpdateRoleInput {
-  name: String!
 }

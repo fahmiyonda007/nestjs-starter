@@ -28,7 +28,7 @@ export class AuthController {
   }
 
   @Post('login')
-  async signIn(@Body() input: SignInInput): Promise<SignInResult> {
+  async signIn(@Body() input: SignInInput): Promise<Partial<SignInResult>> {
     const result = await this.authService.signIn(input);
     if (!result.token) {
       throw new BadRequestException();

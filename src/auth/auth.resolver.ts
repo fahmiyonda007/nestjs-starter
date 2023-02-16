@@ -13,14 +13,16 @@ export class AuthResolver {
   constructor(private readonly authService: AuthService) {}
 
   @Mutation((returns) => User)
-  async signUp(@Args('input') input: SignUpInput): Promise<User> {
-    const result = await this.authService.signUp(input);
+  async signUp(@Args('signUpInput') signUpInput: SignUpInput): Promise<User> {
+    const result = await this.authService.signUp(signUpInput);
     return result;
   }
 
   @Mutation((returns) => SignInResult)
-  async signIn(@Args('input') input: SignInInput): Promise<SignInResult> {
-    const result = await this.authService.signIn(input);
+  async signIn(
+    @Args('signInInput') signInInput: SignInInput,
+  ): Promise<Partial<SignInResult>> {
+    const result = await this.authService.signIn(signInInput);
     if (!result.token) {
       throw new BadRequestException();
     }

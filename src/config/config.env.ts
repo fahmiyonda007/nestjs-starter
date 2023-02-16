@@ -64,11 +64,11 @@ export class EnvConfig {
     obj.TYPEORM_PORT = 5432;
     obj.TYPEORM_LOGGING = false;
     obj.HEALTH_CHECK_DATABASE_TIMEOUT_MS = 3000;
-    obj.JWT_SECRET = '';
+    obj.JWT_SECRET = 'secret';
     obj.JWT_EXPIRES_IN = 86_400;
     obj.SKIP_AUTH = false;
-    obj.SWAGGER_UI = false;
-    obj.GQL_PLAYGROUND = false;
+    obj.SWAGGER_UI = true;
+    obj.GQL_PLAYGROUND = true;
     obj.GQL_SCHEMA_FILE = 'schema.graphql';
     return obj;
   }

@@ -23,12 +23,11 @@ export class ConfigService {
       throw new Error('Invalid env.');
     }
 
-    if (env.NODE_ENV === 'development' || env.NODE_ENV === 'test') {
-      if (!env.JWT_SECRET) {
-        env.JWT_SECRET = 'default';
-      }
-      env.SWAGGER_UI = true;
-      env.GQL_PLAYGROUND = true;
+    if (
+      (env.NODE_ENV === 'development' || env.NODE_ENV === 'test') &&
+      !env.JWT_SECRET
+    ) {
+      env.JWT_SECRET = 'default';
     }
 
     this.env = env;

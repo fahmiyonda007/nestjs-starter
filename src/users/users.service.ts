@@ -16,12 +16,14 @@ export class UsersService {
   ) {}
 
   async findAll(pageOptionsDto: PageOptionsDto): Promise<PageDto<User>> {
-    const queryBuilder = this.myRepo.createQueryBuilder("user");
+    const queryBuilder = this.myRepo.createQueryBuilder('user');
 
     queryBuilder
       .where('user.email like :email', { email: `%${pageOptionsDto.filter}%` })
-      .orWhere('user.username like :username', { username: `%${pageOptionsDto.filter}%` })
-      .orderBy("user.createdAt", pageOptionsDto.order)
+      .orWhere('user.username like :username', {
+        username: `%${pageOptionsDto.filter}%`,
+      })
+      .orderBy('user.createdAt', pageOptionsDto.order)
       .skip(pageOptionsDto.skip)
       .take(pageOptionsDto.take);
 
@@ -31,6 +33,11 @@ export class UsersService {
     const pageMetaDto = new PageMetaDto({ itemCount, pageOptionsDto });
 
     return new PageDto(entities, pageMetaDto);
+  }
+
+  async findOneById(id: string): Promise<User> {
+    const user = await this.myRepo.findOne(id);
+    return user;
   }
 
   async findOneByUserName(username: string): Promise<User> {

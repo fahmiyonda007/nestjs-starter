@@ -1,54 +1,44 @@
-import { Field, ID, Int, ObjectType } from '@nestjs/graphql';
+/* eslint-disable eslint-comments/disable-enable-pair */
+/* eslint-disable import/no-unresolved */
+/* eslint-disable max-classes-per-file */
+import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { Exclude } from 'class-transformer';
-import { IsPhoneNumber } from 'class-validator';
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  Index,
-  IsNull,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-  VersionColumn,
-} from 'typeorm';
+import BaseGuid from 'src/base/base-guid.entity';
+import { Paginated } from 'src/paginate/page.dto';
+import { Column, Entity, VersionColumn } from 'typeorm';
 
 @ObjectType()
-@Entity()
-export class User {
-  @Field((type) => ID)
-  @PrimaryGeneratedColumn()
-  @Exclude()
-  readonly id: number;
-
-  @Field()
-  @Index({ unique: true })
+@Entity('users')
+export class User extends BaseGuid {
+  @Field({ description: 'Full name Of user', nullable: false })
   @Column()
+  fullname: string;
+
+  @Field({ description: 'Unique Username Of user', nullable: false })
+  @Column({ unique: true })
   username: string;
 
-  @Field()
-  @Index({ unique: true })
-  @Column()
+  @Field({ description: 'Unique Email Of user', nullable: false })
+  @Column({ unique: true })
   email: string;
 
-  @Exclude({ toPlainOnly: true })
+  @Field({ description: 'Password Of user', nullable: false })
   @Column()
+  @Exclude({ toPlainOnly: true })
   password: string;
 
-  @Field()
-  @Index({ unique: true })
-  @IsPhoneNumber('ID')
-  @Column({ nullable: true })
+  @Field({ description: 'Phone Of user', nullable: false })
+  @Column()
   phone: string;
 
-  @Field()
-  @CreateDateColumn()
-  readonly createdAt: Date;
-
-  @Field()
-  @UpdateDateColumn()
-  readonly updatedAt: Date;
+  @Field({ description: 'Address Of user', nullable: true })
+  @Column()
+  address: string;
 
   @Field((type) => Int)
   @VersionColumn()
   readonly version: number;
 }
+
+@ObjectType()
+export class PaginatedUser extends Paginated(User) {}

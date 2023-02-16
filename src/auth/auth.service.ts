@@ -35,7 +35,7 @@ export class AuthService {
     return bcrypt.hashSync(password, salt);
   }
 
-  async signIn(input: SignInInput): Promise<SignInResult> {
+  async signIn(input: SignInInput): Promise<Partial<SignInResult>> {
     const user = await this.usersService.findOneByUserName(input.username);
     if (!user) {
       return new SignInResult();
