@@ -6,7 +6,6 @@ import {
   CreateDateColumn,
   Entity,
   Index,
-  IsNull,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
   VersionColumn,
@@ -15,7 +14,7 @@ import {
 @ObjectType()
 @Entity()
 export class User {
-  @Field((type) => ID)
+  @Field(() => ID)
   @PrimaryGeneratedColumn()
   readonly id: number;
 
@@ -47,7 +46,7 @@ export class User {
   @UpdateDateColumn()
   readonly updatedAt: Date;
 
-  @Field((type) => Int)
+  @Field(() => Int)
   @VersionColumn()
   readonly version: number;
 }

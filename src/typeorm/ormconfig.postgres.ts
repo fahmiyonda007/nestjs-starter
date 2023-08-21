@@ -29,9 +29,9 @@ const options: TypeOrmModuleOptions = {
   migrations: [`${__dirname}/../migrations/*.{ts,js}`],
   namingStrategy: new TypeOrmNamingStrategy(),
   logging: env.TYPEORM_LOGGING,
-  cli: {
-    migrationsDir: 'src/migrations',
-  },
+  // cli: {
+  //   migrationsDir: 'src/migrations',
+  // },
 };
 
 export = options;

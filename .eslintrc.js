@@ -1,35 +1,25 @@
 module.exports = {
-  root: true,
-  extends: ['@twihike'],
+  parser: '@typescript-eslint/parser',
   parserOptions: {
-    sourceType: 'module',
     project: 'tsconfig.json',
+    tsconfigRootDir: __dirname,
+    sourceType: 'module',
   },
-  overrides: [
-    {
-      files: ['src/**/*.module.ts'],
-      rules: {
-        '@typescript-eslint/no-extraneous-class': 'off',
-      },
-    },
-    {
-      files: ['src/**/*.entity.ts', 'src/**/*.resolver.ts'],
-      rules: {
-        '@typescript-eslint/no-unused-vars': 'off',
-      },
-    },
-    {
-      files: ['src/**/*.spec.ts', 'test/**/*.e2e-spec.ts'],
-      rules: {
-        'import/no-extraneous-dependencies': 'off',
-        '@typescript-eslint/explicit-function-return-type': 'off',
-      },
-    },
-    {
-      files: ['test/**/*.e2e-spec.ts'],
-      rules: {
-        'jest/expect-expect': 'off',
-      },
-    },
+  plugins: ['@typescript-eslint/eslint-plugin'],
+  extends: [
+    'plugin:@typescript-eslint/recommended',
+    'plugin:prettier/recommended',
   ],
+  root: true,
+  env: {
+    node: true,
+    jest: true,
+  },
+  ignorePatterns: ['.eslintrc.js'],
+  rules: {
+    '@typescript-eslint/interface-name-prefix': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+  },
 };

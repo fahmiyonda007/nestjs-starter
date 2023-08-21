@@ -7,6 +7,8 @@ import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from './config/config.module';
 import { HealthModule } from './health/health.module';
 import { TypeOrmOptionsService } from './typeorm/typeorm-options.service';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
   imports: [
@@ -14,12 +16,14 @@ import { TypeOrmOptionsService } from './typeorm/typeorm-options.service';
       imports: [ConfigModule],
       useClass: TypeOrmOptionsService,
     }),
-    GraphQLModule.forRootAsync({
+    GraphQLModule.forRootAsync<ApolloDriverConfig>({
       imports: [ConfigModule],
+      driver: ApolloDriver,
       useClass: GqlOptionsService,
     }),
     AuthModule,
     HealthModule,
+    HttpModule,
   ],
 })
 export class AppModule {}
